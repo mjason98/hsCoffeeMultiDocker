@@ -1,0 +1,11 @@
+test.py
+.env
+.git
+.venv
+venv
+coffeeS/.venv
+coffeeS/venv
+loadBalancer/.venv
+loadBalancer/venv
+coffeeS/.git
+loadBalancer/.git
