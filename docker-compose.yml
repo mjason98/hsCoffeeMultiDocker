@@ -18,6 +18,8 @@ services:
     build:
       context: coffeeS
       dockerfile: Dockerfile
+      args:
+        - APP_PORT=8080
     restart: always
     depends_on:
       - db
