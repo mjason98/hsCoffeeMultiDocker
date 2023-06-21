@@ -5,6 +5,7 @@ from services.auth import auth_checker
 from services.coffee import get_best_coffee
 from services.coffee import get_top3_coffee
 from services.coffee import set_top3_coffee
+from services.coffee import get_top3_leaderboard
 
 app = Flask(__name__)
 
@@ -32,7 +33,7 @@ def get_favorite_drinks():
         return Response('Unauthorized', 401,
                         {'WWW-Authenticate': 'Basic realm="Login Required"'})
 
-    top3 = get_top3_coffee(userid)
+    top3 = get_top3_leaderboard()
 
     result = {'data': {"top3": list(top3)}}
 

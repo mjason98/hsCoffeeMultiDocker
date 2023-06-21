@@ -24,6 +24,37 @@ def get_best_coffee(userid):
     return best_coffee
 
 
+def get_top3_leaderboard():
+    best_coffee = []
+
+    try:
+        conn = create_conn()
+
+        query = '''
+            select t2.cn from
+            (select t.c1 as cn, COUNT(*) as co from
+            (select c1 from coffee.usercoffee
+            union all
+            select c2 from coffee.usercoffee
+            union ALL
+            select c3 from coffee.usercoffee) as t
+            group by t.c1) as t2
+            order by t2.co desc
+            limit 3
+        '''
+
+        conn.execute(query)
+        result = conn.fetchall()
+        best_coffee = list(map(lambda x: x[0], result))
+
+        conn.close()
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+        raise 'Connection error'
+
+    return best_coffee
+
+
 def get_top3_coffee(userid):
     best_coffee = ''
 
